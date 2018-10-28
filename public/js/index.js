@@ -23,3 +23,7 @@ socket.emit(
     console.log("ACK", msg);
   }
 );
+
+const Awesome = () => <p>Awesome</p>;
+
+ReactDOM.render(<Awesome />, document.getElementById("root"));
