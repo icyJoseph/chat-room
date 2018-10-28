@@ -29,7 +29,7 @@ class MessageList extends React.Component {
         }}
       >
         {this.state.messages.map(({ from, text }) => (
-          <Card style={{ width: "30%", padding: "15px", marginTop: "10px" }}>
+          <Card style={{ width: "250px", padding: "15px", marginTop: "10px" }}>
             <CardTitle>{from} says:</CardTitle>
             <CardText>{text}</CardText>
             <Button style={{ width: "50px" }}>Like</Button>
