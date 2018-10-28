@@ -18,15 +18,15 @@ const io = socketIO(server);
 // register listener
 io.on("connection", socket => {
   console.log("New user connected");
-  // creates a custom event
-  socket.emit("newMessage", {
-    from: "joseph@example.com",
-    text: "What's up?",
-    createAt: 123
-  });
 
   socket.on("createMessage", message => {
     console.log("createMessage", message);
+
+    // emit event to all connections
+    io.emit("newMessage", {
+      ...message,
+      createdAt: new Date().getTime()
+    });
   });
 
   socket.on("disconnect", () => {
