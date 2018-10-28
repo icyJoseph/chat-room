@@ -2,6 +2,7 @@ const path = require("path");
 const http = require("http");
 const express = require("express");
 const socketIO = require("socket.io");
+const { generateMessage } = require("./utils/message");
 
 const port = process.env.PORT || 1337;
 // path to front end files
@@ -20,25 +21,19 @@ io.on("connection", socket => {
   console.log("New user connected");
 
   // emit a message to the socket only
-  socket.emit("newMessage", {
-    from: "Server",
-    text: "Welcome"
-  });
+  socket.emit("newMessage", generateMessage("Server", "Welcome"));
 
   // emit a message to everyone but the socket. Broadcasting.
-  socket.broadcast.emit("newMessage", {
-    from: "Server",
-    text: "New user joined"
-  });
+  socket.broadcast.emit(
+    "newMessage",
+    generateMessage("Server", "New User joined")
+  );
 
-  socket.on("createMessage", message => {
-    console.log("createMessage", message);
+  socket.on("createMessage", ({ from, text }) => {
+    console.log("createMessage", { from, text });
 
     //emit event to all connections
-    io.emit("newMessage", {
-      ...message,
-      createdAt: new Date().getTime()
-    });
+    io.emit("newMessage", generateMessage(from, text));
   });
 
   socket.on("disconnect", () => {
