@@ -21,19 +21,7 @@
         <![endif]-->
     <p> Awesome </p>
     <script src="/socket.io/socket.io.js"></script>
-    <script>
-        // returns the socket management
-        const socket = io();
-
-        socket.on('connect', function () {
-            console.log('Gained connection to server')
-        })
-
-        socket.on('disconnect', function () {
-            console.log('Connection dropped :(')
-        })
-
-    </script>
+    <script src='/js/index.js'></script>
 </body>
 
 </html>

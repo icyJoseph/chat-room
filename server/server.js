@@ -18,6 +18,17 @@ const io = socketIO(server);
 // register listener
 io.on("connection", socket => {
   console.log("New user connected");
+  // creates a custom event
+  socket.emit("newEmail", {
+    from: "joseph@example.com",
+    text: "What's up?",
+    createAt: 123
+  });
+
+  socket.on("createEmail", newEmail => {
+    console.log("createEmail", newEmail);
+  });
+
   socket.on("disconnect", () => {
     console.log("Lost a client :(");
   });
