@@ -19,17 +19,23 @@ const io = socketIO(server);
 io.on("connection", socket => {
   console.log("New user connected");
 
+  // emit a message to the socket only
+  socket.emit("newMessage", {
+    from: "Server",
+    text: "Welcome"
+  });
+
+  // emit a message to everyone but the socket. Broadcasting.
+  socket.broadcast.emit("newMessage", {
+    from: "Server",
+    text: "New user joined"
+  });
+
   socket.on("createMessage", message => {
     console.log("createMessage", message);
 
-    // emit event to all connections
-    // io.emit("newMessage", {
-    //   ...message,
-    //   createdAt: new Date().getTime()
-    // });
-
-    // true broadcast
-    socket.broadcast.emit("newMessage", {
+    //emit event to all connections
+    io.emit("newMessage", {
       ...message,
       createdAt: new Date().getTime()
     });
