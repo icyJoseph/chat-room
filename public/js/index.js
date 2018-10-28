@@ -9,9 +9,6 @@ socket.on("disconnect", function() {
   console.log("Connection dropped :(");
 });
 
-// React Setup
-const Welcome = () => <h1>Welcome!</h1>;
-
 const App = () => (
   <div>
     <Welcome />
