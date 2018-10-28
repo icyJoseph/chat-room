@@ -11,6 +11,7 @@ class Form extends React.Component {
 
   submit = e => {
     e.preventDefault();
+
     return socket.emit(
       "createMessage",
       {

@@ -5,10 +5,6 @@ socket.on("connect", function() {
   console.log("Gained connection to server");
 });
 
-socket.on("newMessage", function(message) {
-  console.log("newMessage", message);
-});
-
 socket.on("disconnect", function() {
   console.log("Connection dropped :(");
 });

@@ -2,6 +2,7 @@ class MessageList extends React.Component {
   state = { messages: [] };
 
   componentDidMount() {
+    //subscribe the event handler
     socket.on("newMessage", msg => {
       return this.addMessage(msg);
     });
