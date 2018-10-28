@@ -1,12 +1,19 @@
-const { Card, Button, CardTitle, CardText, Form, Label, Input } = window[
-  "Reactstrap"
-];
+const {
+  Card,
+  Button,
+  CardTitle,
+  CardText,
+  CardLink,
+  Form,
+  Label,
+  Input
+} = window["Reactstrap"];
 
 class MessageList extends React.Component {
   state = { messages: [] };
 
   componentDidMount() {
-    //subscribe the event handler
+    //subscribe the event handlers
     socket.on("newMessage", msg => {
       return this.addMessage(msg);
     });
@@ -28,12 +35,20 @@ class MessageList extends React.Component {
           padding: "10px 30px"
         }}
       >
-        {this.state.messages.map(({ from, text }) => (
-          <Card style={{ width: "250px", padding: "15px", marginTop: "10px" }}>
+        {this.state.messages.map(({ url, from, text }) => (
+          <CardText
+            style={{ width: "250px", padding: "15px", marginTop: "10px" }}
+          >
             <CardTitle>{from} says:</CardTitle>
-            <CardText>{text}</CardText>
-            <Button style={{ width: "50px" }}>Like</Button>
-          </Card>
+            {url ? (
+              <CardLink href={url} target="_blank" rel="noopener">
+                I am here!
+              </CardLink>
+            ) : (
+              <CardText>{text}</CardText>
+            )}
+            {!url && <Button style={{ width: "50px" }}>Like</Button>}
+          </CardText>
         ))}
       </div>
     );
