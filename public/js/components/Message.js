@@ -1,4 +1,6 @@
-class Form extends React.Component {
+const { Button, Form, Label, Input } = window["Reactstrap"];
+
+class Message extends React.Component {
   state = {
     value: "",
     success: ""
@@ -30,18 +32,28 @@ class Form extends React.Component {
   render() {
     const { success } = this.state;
     return (
-      <div>
-        <p>{success ? this.state.success : "Write something!"}</p>
-        <form onSubmit={this.submit}>
-          <input
+      <div
+        style={{
+          position: "absolute",
+          height: this.props.height,
+          bottom: "25px",
+          padding: "15px",
+          width: "100%"
+        }}
+      >
+        <Label for="exampleText">
+          {success ? this.state.success : "Write something!"}
+        </Label>
+        <Form onSubmit={this.submit} style={{ width: "100%", display: "flex" }}>
+          <Input
             name="message"
             type="text"
             placeholder="Message"
             value={this.state.value}
             onChange={this.handleChange}
           />
-          <button>Send</button>
-        </form>
+          <Button>Send</Button>
+        </Form>
       </div>
     );
   }
