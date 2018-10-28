@@ -12,8 +12,8 @@ socket.on("disconnect", function() {
 const App = () => (
   <div>
     <Welcome />
-    <Form />
     <MessageList />
+    <Message />
   </div>
 );
 
