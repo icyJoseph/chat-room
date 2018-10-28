@@ -15,6 +15,14 @@ const server = http.createServer(app);
 // returns the webSocket server
 const io = socketIO(server);
 
+// register listener
+io.on("connection", socket => {
+  console.log("New user connected");
+  socket.on("disconnect", () => {
+    console.log("Lost a client :(");
+  });
+});
+
 app.use(express.static(publicPath));
 
 server.listen(port, () => {

@@ -25,6 +25,14 @@
         // returns the socket management
         const socket = io();
 
+        socket.on('connect', () => {
+            console.log('Gained connection to server')
+        })
+
+        socket.on('disconnect', () => {
+            console.log('Connection dropped :(')
+        })
+
     </script>
 </body>
 
