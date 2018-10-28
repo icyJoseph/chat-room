@@ -2,7 +2,10 @@ const path = require("path");
 const http = require("http");
 const express = require("express");
 const socketIO = require("socket.io");
-const { generateMessage } = require("./utils/message");
+const {
+  generateMessage,
+  generateMessageFromGeolocation
+} = require("./utils/message");
 
 const port = process.env.PORT || 1337;
 // path to front end files
@@ -35,7 +38,20 @@ io.on("connection", socket => {
     //emit event to all connections
     io.emit("newMessage", generateMessage(from, text));
     callback({
-      msg: "Got your message"
+      msg: "Send your message"
+    });
+  });
+
+  socket.on("sharingGeolocation", ({ from, latitude, longitude }, callback) => {
+    console.log("sharingGeolocation", { from, latitude, longitude });
+
+    //emit event to all connections
+    io.emit(
+      "newMessage",
+      generateMessageFromGeolocation(from, latitude, longitude)
+    );
+    callback({
+      msg: "Shared your location"
     });
   });
 
