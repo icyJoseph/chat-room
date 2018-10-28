@@ -10,8 +10,8 @@ socket.on("connect", function() {
   });
 });
 
-socket.on("newMessage", function(email) {
-  console.log("newMessage", email);
+socket.on("newMessage", function(message) {
+  console.log("newMessage", message);
 });
 
 socket.on("disconnect", function() {
