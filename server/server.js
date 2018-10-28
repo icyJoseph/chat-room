@@ -19,14 +19,14 @@ const io = socketIO(server);
 io.on("connection", socket => {
   console.log("New user connected");
   // creates a custom event
-  socket.emit("newEmail", {
+  socket.emit("newMessage", {
     from: "joseph@example.com",
     text: "What's up?",
     createAt: 123
   });
 
-  socket.on("createEmail", newEmail => {
-    console.log("createEmail", newEmail);
+  socket.on("createMessage", message => {
+    console.log("createMessage", message);
   });
 
   socket.on("disconnect", () => {
