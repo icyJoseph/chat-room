@@ -10,10 +10,10 @@ socket.on("connect", function() {
   });
 });
 
-socket.on("disconnect", function() {
-  console.log("Connection dropped :(");
-});
-
 socket.on("newMessage", function(email) {
   console.log("newMessage", email);
+});
+
+socket.on("disconnect", function() {
+  console.log("Connection dropped :(");
 });
