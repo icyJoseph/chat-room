@@ -29,11 +29,14 @@ io.on("connection", socket => {
     generateMessage("Server", "New User joined")
   );
 
-  socket.on("createMessage", ({ from, text }) => {
+  socket.on("createMessage", ({ from, text }, callback) => {
     console.log("createMessage", { from, text });
 
     //emit event to all connections
     io.emit("newMessage", generateMessage(from, text));
+    callback({
+      msg: "Got your message"
+    });
   });
 
   socket.on("disconnect", () => {

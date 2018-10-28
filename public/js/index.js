@@ -12,3 +12,14 @@ socket.on("newMessage", function(message) {
 socket.on("disconnect", function() {
   console.log("Connection dropped :(");
 });
+
+socket.emit(
+  "createMessage",
+  {
+    from: "Fr",
+    text: "Hi"
+  },
+  function({ msg }) {
+    console.log("ACK", msg);
+  }
+);
