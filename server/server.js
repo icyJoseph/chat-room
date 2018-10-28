@@ -23,7 +23,13 @@ io.on("connection", socket => {
     console.log("createMessage", message);
 
     // emit event to all connections
-    io.emit("newMessage", {
+    // io.emit("newMessage", {
+    //   ...message,
+    //   createdAt: new Date().getTime()
+    // });
+
+    // true broadcast
+    socket.broadcast.emit("newMessage", {
       ...message,
       createdAt: new Date().getTime()
     });
