@@ -25,31 +25,24 @@ class MessageList extends React.Component {
 
   render() {
     return (
-      <div
-        id="message-list"
-        style={{
-          width: "100%",
-          height: "50%",
-          position: "absolute",
-          overflowY: "scroll",
-          padding: "10px 30px"
-        }}
-      >
-        {this.state.messages.map(({ url, from, text }) => (
-          <CardText
-            style={{ width: "250px", padding: "15px", marginTop: "10px" }}
-          >
-            <CardTitle>{from} says:</CardTitle>
-            {url ? (
-              <CardLink href={url} target="_blank" rel="noopener">
-                I am here!
-              </CardLink>
-            ) : (
-              <CardText>{text}</CardText>
-            )}
-            {!url && <Button style={{ width: "50px" }}>Like</Button>}
-          </CardText>
-        ))}
+      <div className="messages">
+        <div className="message-list">
+          {this.state.messages.map(({ url, from, text }) => (
+            <CardText className="card-text">
+              <CardTitle>{from} says:</CardTitle>
+              {url ? (
+                <CardLink href={url} target="_blank" rel="noopener">
+                  I am here!
+                </CardLink>
+              ) : (
+                <CardText>{text}</CardText>
+              )}
+              {!url && <Button className="action-button">Like</Button>}
+            </CardText>
+          ))}
+        </div>
+
+        {this.props.children}
       </div>
     );
   }
