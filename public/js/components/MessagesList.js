@@ -29,7 +29,9 @@ class MessageList extends React.Component {
         <div className="top-container message-list">
           {this.state.messages.map(({ url, from, text, formattedTime }) => (
             <CardText className="card-text-container">
-              <CardTitle>{from} says:</CardTitle>
+              <CardTitle>
+                <span className="message-username">{from}</span> says:
+              </CardTitle>
               {url ? (
                 <CardLink href={url} target="_blank" rel="noopener">
                   I am here!
@@ -37,8 +39,8 @@ class MessageList extends React.Component {
               ) : (
                 <CardText>{text}</CardText>
               )}
-              {!url && <Button className="action-button">Like</Button>}
-              <CardText>Sent at {formattedTime}</CardText>
+              {/* {!url && <Button className="action-button">Like</Button>} */}
+              <CardText className="timestamp">Sent at {formattedTime}</CardText>
             </CardText>
           ))}
         </div>
