@@ -27,7 +27,7 @@ class MessageList extends React.Component {
     return (
       <div className="messages">
         <div className="top-container message-list">
-          {this.state.messages.map(({ url, from, text }) => (
+          {this.state.messages.map(({ url, from, text, formattedTime }) => (
             <CardText className="card-text-container">
               <CardTitle>{from} says:</CardTitle>
               {url ? (
@@ -38,6 +38,7 @@ class MessageList extends React.Component {
                 <CardText>{text}</CardText>
               )}
               {!url && <Button className="action-button">Like</Button>}
+              <CardText>Sent at {formattedTime}</CardText>
             </CardText>
           ))}
         </div>
