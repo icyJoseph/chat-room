@@ -13,7 +13,7 @@ const App = () => (
   <React.Fragment>
     <Welcome />
     <MessageList>
-      <Message />
+      <MessageInput />
     </MessageList>
   </React.Fragment>
 );

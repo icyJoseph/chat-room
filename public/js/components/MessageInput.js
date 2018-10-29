@@ -6,7 +6,7 @@ const options = {
   maximumAge: 0
 };
 
-class Message extends React.Component {
+class MessageInput extends React.Component {
   state = {
     value: "",
     notice: ""
