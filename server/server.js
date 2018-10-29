@@ -38,7 +38,7 @@ io.on("connection", socket => {
     //emit event to all connections
     io.emit("newMessage", generateMessage(from, text));
     callback({
-      msg: "Send your message"
+      msg: "Sent your message"
     });
   });
 
