@@ -1,15 +1,25 @@
-const generateMessage = (from, text) => ({
-  from,
-  text,
-  createdAt: new Date().getTime()
-});
+const moment = require("moment");
 
-const generateMessageFromGeolocation = (from, lat, long) => ({
-  lat,
-  long,
-  from,
-  url: `https://www.google.com/maps/?q=${lat},${long}`,
-  createdAt: new Date().getTime()
-});
+const generateMessage = (from, text) => {
+  const timeStamp = moment();
+  return {
+    from,
+    text,
+    createdAt: timeStamp.valueOf(),
+    formattedTime: timeStamp.format("h:mm a")
+  };
+};
+
+const generateMessageFromGeolocation = (from, lat, long) => {
+  const timeStamp = moment();
+  return {
+    lat,
+    long,
+    from,
+    url: `https://www.google.com/maps/?q=${lat},${long}`,
+    createdAt: timeStamp.valueOf(),
+    formattedTime: timeStamp.format("h:mm a")
+  };
+};
 
 module.exports = { generateMessage, generateMessageFromGeolocation };
