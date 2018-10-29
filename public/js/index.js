@@ -19,9 +19,7 @@ class App extends React.Component {
   }
 
   setConnection = payload => this.setState({ connected: payload });
-  setUser = user => {
-    return this.setState({ user });
-  };
+  setUser = user => this.setState({ user });
 
   render() {
     const { connected, user } = this.state;
