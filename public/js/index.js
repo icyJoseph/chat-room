@@ -2,30 +2,36 @@
 const socket = io();
 
 function setConnection(payload) {
-  console.log("Connection status: ", payload);
   return this.setConnection(payload);
 }
 
 class App extends React.Component {
   state = {
-    connected: false
+    connected: false,
+    user: undefined
   };
 
   componentDidMount() {
+    // bind the socket to Component
     socket.on("connect", setConnection.bind(this, true));
 
     socket.on("disconnect", setConnection.bind(this, false));
   }
 
   setConnection = payload => this.setState({ connected: payload });
+  setUser = user => {
+    return this.setState({ user });
+  };
 
   render() {
-    const { connected } = this.state;
+    const { connected, user } = this.state;
     return (
       <React.Fragment>
-        <Welcome connected={connected} />
+        <Welcome user={user} connected={connected}>
+          <User user={user} setUser={this.setUser} />
+        </Welcome>
         <MessageList>
-          <MessageInput />
+          <MessageInput user={user} />
         </MessageList>
       </React.Fragment>
     );

@@ -1,10 +1,10 @@
 const { Badge, Jumbotron } = window["Reactstrap"];
 
-const Welcome = ({ connected }) => {
+const Welcome = ({ connected, user, children }) => {
   return (
-    <div className="flex-height">
-      <Jumbotron>
-        <h1 className="display-3">Hello, world!</h1>
+    <div className="welcome-container">
+      <Jumbotron className="top-container">
+        <h1 className="display-3">Hello, {user || "world!"}</h1>
         <Badge color={connected ? "success" : "danger"}>
           Connection: {connected ? "OK" : "Bad"}
         </Badge>
@@ -12,6 +12,7 @@ const Welcome = ({ connected }) => {
         <hr className="my-2" />
         <p>It uses SocketIO to bring people together</p>
       </Jumbotron>
+      {children}
     </div>
   );
 };

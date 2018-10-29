@@ -23,7 +23,7 @@ class MessageInput extends React.Component {
     return socket.emit(
       "createMessage",
       {
-        from: "Browser",
+        from: this.props.user || "Anon",
         text: this.state.value
       },
       this.ack // acknowledgement from server
@@ -60,12 +60,16 @@ class MessageInput extends React.Component {
   render() {
     const { notice } = this.state;
     return (
-      <div className="message-input">
+      <div className="bottom-container">
         <Label for="exampleText">
           {notice ? this.state.notice : "Write something!"}
         </Label>
         <div className="flex-container">
-          <Form onSubmit={this.submit} className="flex-container">
+          <Form
+            onSubmit={this.submit}
+            className="flex-container"
+            autocomplete="off"
+          >
             <Input
               name="message"
               type="text"
