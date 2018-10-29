@@ -20,13 +20,16 @@ class MessageList extends React.Component {
   }
 
   addMessage = msg => {
-    return this.setState(prev => ({ messages: prev.messages.concat(msg) }));
+    return this.setState(
+      prev => ({ messages: prev.messages.concat(msg) }),
+      scrollToBottom
+    );
   };
 
   render() {
     return (
       <div className="messages">
-        <div className="top-container message-list">
+        <div id="messages-container" className="top-container message-list">
           {this.state.messages.map(({ url, from, text, formattedTime }) => (
             <CardText className="card-text-container">
               <CardTitle>
@@ -44,9 +47,33 @@ class MessageList extends React.Component {
             </CardText>
           ))}
         </div>
-
         {this.props.children}
       </div>
     );
   }
+}
+
+// Reasoning for scroll
+// if  scrollTop + containerHeight + newMessageHeight + previousLastMessage>= scrollHeight (all messages)
+// then autoscroll
+// if we are nearby the bottom, second to last message, scroll to bottom
+
+function scrollToBottom() {
+  const container = document.getElementById("messages-container");
+  const scrollTop = container.scrollTop;
+  const containerHeight = container.offsetHeight;
+  const scrollHeight = container.scrollHeight;
+
+  const newMessageHeight = container.lastChild.offsetHeight;
+  const prevLast =
+    container.lastChild.previousElementSibling &&
+    container.lastChild.previousElementSibling.offsetHeight;
+
+  const shouldScrollToBottom =
+    scrollTop + containerHeight + newMessageHeight + prevLast >= scrollHeight;
+
+  if (shouldScrollToBottom) {
+    container.scrollTo(0, scrollHeight);
+  }
+  return null;
 }
