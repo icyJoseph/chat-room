@@ -36,6 +36,7 @@ class MessageList extends React.Component {
 
   toBottom = () => {
     const scrollHeight = this.container.scrollHeight;
+    this.props.setInputShouldFocus(true);
     return this.container.scrollTo(0, scrollHeight);
   };
 

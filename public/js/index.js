@@ -8,7 +8,8 @@ function setConnection(payload) {
 class App extends React.Component {
   state = {
     connected: false,
-    user: undefined
+    user: undefined,
+    inputShouldFocus: false
   };
 
   componentDidMount() {
@@ -20,16 +21,21 @@ class App extends React.Component {
 
   setConnection = payload => this.setState({ connected: payload });
   setUser = user => this.setState({ user });
+  setInputShouldFocus = payload => this.setState({ inputShouldFocus: payload });
 
   render() {
-    const { connected, user } = this.state;
+    const { connected, user, inputShouldFocus } = this.state;
     return (
       <React.Fragment>
         <Welcome user={user} connected={connected}>
           <User user={user} setUser={this.setUser} />
         </Welcome>
-        <MessageList>
-          <MessageInput user={user} />
+        <MessageList setInputShouldFocus={this.setInputShouldFocus}>
+          <MessageInput
+            user={user}
+            inputShouldFocus={inputShouldFocus}
+            setInputShouldFocus={this.setInputShouldFocus}
+          />
         </MessageList>
       </React.Fragment>
     );

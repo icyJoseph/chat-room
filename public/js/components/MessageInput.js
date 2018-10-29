@@ -14,6 +14,13 @@ class MessageInput extends React.Component {
     disableGeoLocation: false
   };
 
+  componentDidUpdate(prevProps) {
+    if (!prevProps.inputShouldFocus && this.props.inputShouldFocus) {
+      this.props.setInputShouldFocus(false);
+      return this._input.focus();
+    }
+  }
+
   handleChange = e => {
     e.preventDefault();
     return this.setState({ value: e.target.value, notice: "" });
@@ -90,7 +97,7 @@ class MessageInput extends React.Component {
               autofocus="true"
               value={this.state.value}
               onChange={this.handleChange}
-              ref={el => {
+              innerRef={el => {
                 this._input = el;
               }}
             />
