@@ -10,14 +10,34 @@ const {
 } = window["Reactstrap"];
 
 class MessageList extends React.Component {
-  state = { messages: [] };
+  state = { messages: [], show: false };
 
   componentDidMount() {
     //subscribe the event handlers
     socket.on("newMessage", msg => {
       return this.addMessage(msg);
     });
+    this.container = document.getElementById("messages-container");
+    this.container.addEventListener("scroll", this.shouldShowToBottom);
   }
+
+  componentWillUnmount() {
+    this.container.removeEventListener("scroll", this.shouldShowToBottom);
+  }
+
+  shouldShowToBottom = () => {
+    const scrollTop = this.container.scrollTop;
+    const scrollHeight = this.container.scrollHeight;
+    const containerHeight = this.container.offsetHeight;
+    const nextState = scrollHeight - containerHeight > scrollTop + 5;
+
+    return this.setState({ show: nextState });
+  };
+
+  toBottom = () => {
+    const scrollHeight = this.container.scrollHeight;
+    return this.container.scrollTo(0, scrollHeight);
+  };
 
   addMessage = msg => {
     return this.setState(
@@ -27,8 +47,16 @@ class MessageList extends React.Component {
   };
 
   render() {
+    const { show } = this.state;
     return (
       <div className="messages">
+        {show && (
+          <div className="to-bottom-container">
+            <div className="to-bottom-wrapper">
+              <Button onClick={this.toBottom}>To Bottom</Button>
+            </div>
+          </div>
+        )}
         <div id="messages-container" className="top-container message-list">
           {this.state.messages.map(({ url, from, text, formattedTime }) => (
             <CardText className="card-text-container">
@@ -70,7 +98,8 @@ function scrollToBottom() {
     container.lastChild.previousElementSibling.offsetHeight;
 
   const shouldScrollToBottom =
-    scrollTop + containerHeight + newMessageHeight + prevLast >= scrollHeight;
+    scrollTop + containerHeight + newMessageHeight + prevLast >=
+    scrollHeight - 10;
 
   if (shouldScrollToBottom) {
     container.scrollTo(0, scrollHeight);
