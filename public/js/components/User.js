@@ -22,7 +22,7 @@ class User extends React.Component {
 
   render() {
     const { value } = this.state;
-    const { user } = this.props;
+    const { user, goBack } = this.props;
     return (
       <div className="bottom-container">
         {user ? (
@@ -51,6 +51,9 @@ class User extends React.Component {
             </div>
           </div>
         )}
+        <Button className="back-button" onClick={goBack}>
+          Back
+        </Button>
       </div>
     );
   }
