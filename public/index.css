@@ -13,6 +13,55 @@ body::-webkit-scrollbar {
   display: none;
 }
 
-#message-list::-webkit-scrollbar {
+#root {
+  display: flex;
+  height: 100%;
+}
+
+.messages {
+  flex: 4;
+  display: flex;
+  height: 100vh;
+  flex-direction: column;
+}
+
+.message-list {
+  flex-basis: 80%;
+  flex-grow: 0;
+  flex-shrink: 0;
+  overflow-y: scroll;
+  padding: 10px 30px;
+}
+.message-list::-webkit-scrollbar {
   display: none;
+}
+
+.message-input {
+  flex-basis: 20%;
+  flex-grow: 0;
+  flex-shrink: 0;
+}
+
+.card-text {
+  width: 250px;
+  padding: 15px;
+  margin-top: 10px;
+}
+
+.action-button {
+  width: 50px;
+}
+
+.flex-container {
+  width: 100%;
+  display: flex;
+}
+
+.message-button {
+  margin: 0 5px;
+}
+
+.flex-height {
+  flex: 1;
+  height: 100%;
 }
