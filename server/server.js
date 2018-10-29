@@ -51,7 +51,8 @@ io.on("connection", socket => {
       generateMessageFromGeolocation(from, latitude, longitude)
     );
     callback({
-      msg: "Shared your location"
+      msg: "Shared your location",
+      payload: false
     });
   });
 

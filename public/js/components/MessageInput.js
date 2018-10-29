@@ -6,10 +6,12 @@ const options = {
   maximumAge: 0
 };
 
+// TODO: implement debounce for submit
 class MessageInput extends React.Component {
   state = {
     value: "",
-    notice: ""
+    notice: "",
+    disableGeoLocation: false
   };
 
   handleChange = e => {
@@ -20,13 +22,16 @@ class MessageInput extends React.Component {
   submit = e => {
     e.preventDefault();
 
-    return socket.emit(
-      "createMessage",
-      {
-        from: this.props.user || "Anon",
-        text: this.state.value
-      },
-      this.ack // acknowledgement from server
+    return (
+      this.state.value &&
+      socket.emit(
+        "createMessage",
+        {
+          from: this.props.user || "Anon",
+          text: this.state.value
+        },
+        this.ack // acknowledgement from server
+      )
     );
   };
 
@@ -34,6 +39,7 @@ class MessageInput extends React.Component {
     if (!navigator.geolocation) {
       return this.setState({ notice: "Geolocation not supported" });
     }
+    this.updateGeoButton({ payload: true });
     return navigator.geolocation.getCurrentPosition(
       ({ coords: { latitude, longitude } }) =>
         socket.emit(
@@ -43,11 +49,18 @@ class MessageInput extends React.Component {
             latitude,
             longitude
           },
-          this.ack // acknowledgement from server
+          this.updateGeoButton // acknowledgement from server
         ),
       () => this.setState({ notice: "Geolocation not allowed" }),
       options
     );
+  };
+
+  updateGeoButton = ({ payload, msg }) => {
+    this.setState(prev => ({
+      disableGeoLocation: payload,
+      notice: msg || prev.msg
+    }));
   };
 
   ack = ({ msg }) => {
@@ -58,7 +71,7 @@ class MessageInput extends React.Component {
   clearWith = msg => this.setState({ value: "", notice: msg });
 
   render() {
-    const { notice } = this.state;
+    const { notice, disableGeoLocation } = this.state;
     return (
       <div className="bottom-container">
         <Label for="exampleText">
@@ -83,7 +96,11 @@ class MessageInput extends React.Component {
             />
             <Button className="message-button">Send</Button>
           </Form>
-          <Button className="message-button" onClick={this.getLocation}>
+          <Button
+            className="message-button"
+            disabled={disableGeoLocation}
+            onClick={this.getLocation}
+          >
             Location
           </Button>
         </div>
