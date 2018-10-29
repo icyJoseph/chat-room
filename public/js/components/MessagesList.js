@@ -28,7 +28,7 @@ class MessageList extends React.Component {
       <div className="messages">
         <div className="message-list">
           {this.state.messages.map(({ url, from, text }) => (
-            <CardText className="card-text">
+            <CardText className="card-text-container">
               <CardTitle>{from} says:</CardTitle>
               {url ? (
                 <CardLink href={url} target="_blank" rel="noopener">

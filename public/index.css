@@ -42,10 +42,11 @@ body::-webkit-scrollbar {
   flex-shrink: 0;
 }
 
-.card-text {
+.card-text-container {
   width: 250px;
   padding: 15px;
   margin-top: 10px;
+  border-top: 1px solid green;
 }
 
 .action-button {
