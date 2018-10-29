@@ -26,7 +26,7 @@ class MessageList extends React.Component {
   render() {
     return (
       <div className="messages">
-        <div className="message-list">
+        <div className="top-container message-list">
           {this.state.messages.map(({ url, from, text }) => (
             <CardText className="card-text-container">
               <CardTitle>{from} says:</CardTitle>
