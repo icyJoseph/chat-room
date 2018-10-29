@@ -14,6 +14,8 @@ class MessageInput extends React.Component {
     disableGeoLocation: false
   };
 
+  _input = React.createRef();
+
   componentDidUpdate(prevProps) {
     if (!prevProps.inputShouldFocus && this.props.inputShouldFocus) {
       this.props.setInputShouldFocus(false);
@@ -81,7 +83,7 @@ class MessageInput extends React.Component {
     const { notice, disableGeoLocation } = this.state;
     return (
       <div className="bottom-container">
-        <Label for="exampleText">
+        <Label for="notice">
           {notice ? this.state.notice : "Write something!"}
         </Label>
         <div className="flex-container">
@@ -97,9 +99,7 @@ class MessageInput extends React.Component {
               autofocus="true"
               value={this.state.value}
               onChange={this.handleChange}
-              innerRef={el => {
-                this._input = el;
-              }}
+              innerRef={this._input}
             />
             <Button className="message-button">Send</Button>
           </Form>
