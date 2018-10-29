@@ -60,23 +60,12 @@ class Message extends React.Component {
   render() {
     const { notice } = this.state;
     return (
-      <div
-        style={{
-          position: "absolute",
-          height: this.props.height,
-          bottom: "25px",
-          padding: "15px",
-          width: "100%"
-        }}
-      >
+      <div className="message-input">
         <Label for="exampleText">
           {notice ? this.state.notice : "Write something!"}
         </Label>
-        <div style={{ width: "100%", display: "flex" }}>
-          <Form
-            onSubmit={this.submit}
-            style={{ width: "100%", display: "flex" }}
-          >
+        <div className="flex-container">
+          <Form onSubmit={this.submit} className="flex-container">
             <Input
               name="message"
               type="text"
@@ -84,9 +73,9 @@ class Message extends React.Component {
               value={this.state.value}
               onChange={this.handleChange}
             />
-            <Button style={{ margin: "0 5px" }}>Send</Button>
+            <Button className="message-button">Send</Button>
           </Form>
-          <Button style={{ margin: "0 5px" }} onClick={this.getLocation}>
+          <Button className="message-button" onClick={this.getLocation}>
             Location
           </Button>
         </div>
