@@ -10,11 +10,12 @@ socket.on("disconnect", function() {
 });
 
 const App = () => (
-  <div>
+  <React.Fragment>
     <Welcome />
-    <MessageList />
-    <Message />
-  </div>
+    <MessageList>
+      <Message />
+    </MessageList>
+  </React.Fragment>
 );
 
 ReactDOM.render(<App />, document.getElementById("root"));
