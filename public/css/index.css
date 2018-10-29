@@ -69,6 +69,10 @@ body::-webkit-scrollbar {
   margin: 0 5px;
 }
 
+.back-button {
+  margin: 5px 0px;
+}
+
 .welcome-container {
   flex: 1;
   height: 100%;
@@ -94,4 +98,12 @@ body::-webkit-scrollbar {
 .to-bottom-wrapper {
   position: absolute;
   top: 10px;
+}
+
+.room-selection-page {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
