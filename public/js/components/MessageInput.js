@@ -45,7 +45,7 @@ class MessageInput extends React.Component {
         socket.emit(
           "sharingGeolocation",
           {
-            from: "Browser",
+            from: this.props.user || "Anon",
             latitude,
             longitude
           },
