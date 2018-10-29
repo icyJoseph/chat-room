@@ -74,8 +74,12 @@ class MessageInput extends React.Component {
               name="message"
               type="text"
               placeholder="Message"
+              autofocus="true"
               value={this.state.value}
               onChange={this.handleChange}
+              ref={el => {
+                this._input = el;
+              }}
             />
             <Button className="message-button">Send</Button>
           </Form>
