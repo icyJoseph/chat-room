@@ -19,7 +19,7 @@ class MessageInput extends React.Component {
   componentDidUpdate(prevProps) {
     if (!prevProps.inputShouldFocus && this.props.inputShouldFocus) {
       this.props.setInputShouldFocus(false);
-      return this._input.focus();
+      return this._input.current.focus();
     }
   }
 
